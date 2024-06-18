@@ -1,14 +1,18 @@
 import React from "react";
-import BooksPage from "./components/Books";
+
+import { Route, Routes } from "react-router-dom";
+import Books from "./pages/Books";
+import Create from "./pages/Create";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="bg-gray-800 p-4 text-white text-center">
-        <h1 className="text-3xl">My Bookstore</h1>
-      </header>
-      <main className="p-4"></main>
-      <BooksPage />
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/Books" Component={Books} />
+        <Route path="/Create" Component={Create} />
+      </Routes>
     </div>
   );
 };
