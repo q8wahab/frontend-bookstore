@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createBook } from "../api/auth"; // Adjust the path if necessary
+import { createBook } from "../api/auth";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -19,7 +19,7 @@ const Create = () => {
     try {
       await createBook(title, author, price, image);
       setSuccess("Book created successfully!");
-      // Clear the form fields
+
       setTitle("");
       setAuthor("");
       setPrice("");

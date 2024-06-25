@@ -37,4 +37,14 @@ const delBook = async (id) => {
   }
 };
 
-export { getAllbooks, createBook, delBook };
+const updateBook = async (id, updatedBook) => {
+  try {
+    const res = await instance.put(`/${id}`, updatedBook);
+    return res.data;
+  } catch (error) {
+    console.error("Error during updating the book:", error);
+    throw error;
+  }
+};
+
+export { getAllbooks, createBook, delBook, updateBook };

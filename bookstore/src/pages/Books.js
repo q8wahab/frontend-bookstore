@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { delBook, getAllbooks } from "../api/auth";
+import { delBook, getAllbooks, updateBook } from "../api/auth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
@@ -23,8 +23,22 @@ const Books = () => {
       queryClient.invalidateQueries("getallbooks");
     },
   });
+
+  const mutation2 = useMutation({
+    mutationKey: ["updatebook"],
+    mutationFn: (id) => updateBook(id),
+    onSuccess: (data) => {
+      console.log("updated successful:", data);
+      queryClient.invalidateQueries("updatedbooks");
+    },
+  });
+
   const handleDelete = (id) => {
     mutation.mutate(id);
+  };
+
+  const handleUpdate = (id) => {
+    mutation2.mutate(id);
   };
 
   // useEffect(() => {
@@ -61,6 +75,12 @@ const Books = () => {
                 onClick={() => handleDelete(book._id)}
               >
                 DELETE
+              </button>
+              <button
+                className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-blue-800 text-white"
+                onClick={() => handleUpdate(book._id)}
+              >
+                Update
               </button>
             </div>
             <figure>
